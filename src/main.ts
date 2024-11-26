@@ -15,6 +15,12 @@ app.use(router)
 app.use(PrimeVue, {
   theme: {
     preset: MyPreset,
+    options: {
+      cssLayer: {
+        name: 'primevue',
+        order: 'tailwind-base, primevue, tailwind-utilities',
+      },
+    },
   },
 })
 app.mount('#app')
