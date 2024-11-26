@@ -5,7 +5,9 @@ import BaseHeader from './components/base/BaseHeader.vue'
 
 <template>
   <BaseHeader />
-  <RouterView />
+  <main class="flex flex-row justify-center">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped></style>
