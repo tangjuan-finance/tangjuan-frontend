@@ -7,11 +7,11 @@ import { RouterLink } from 'vue-router'
 
     <section class='flex flex-col w-[1024px] mt-2 text-sm'>
       <div>
-        <RouterLink to="/about" class="text-stone-900 hover:text-primary-400">關於躺卷</RouterLink>
+        <RouterLink to="/about" class="text-stone-900 hover:text-primary-400 font-title">關於躺卷</RouterLink>
       </div>
       <Divider />
       <div>
-        <p>© 2024 Tang Juan.</p>
+        <p class="font-title">© 2024 Tang Juan.</p>
       </div>
     </section>
   </footer>

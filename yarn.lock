@@ -5072,6 +5072,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"primeicons@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "primeicons@npm:7.0.0"
+  checksum: 10c0/a7f6344d6db49e785d2040b35f8cae761d15bb8f8ee70ade8981d45438245414e913fe7235921122aade2b0a11a032c98b44dc527be2da11aa791ff145099c06
+  languageName: node
+  linkType: hard
+
 "primevue@npm:^4.2.3":
   version: 4.2.3
   resolution: "primevue@npm:4.2.3"
@@ -5855,6 +5862,7 @@ __metadata:
     pinia: "npm:^2.2.6"
     postcss: "npm:^8.4.49"
     prettier: "npm:^3.3.3"
+    primeicons: "npm:^7.0.0"
     primevue: "npm:^4.2.3"
     start-server-and-test: "npm:^2.0.8"
     tailwindcss: "npm:^3.4.15"
