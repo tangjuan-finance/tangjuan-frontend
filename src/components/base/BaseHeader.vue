@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 
 <template>
   <header class="flex flex-row justify-center bg-primary-300 p-2">
-    <nav class="flex flex-row justify-between w-screen mx-4 max-w-6xl">
+    <nav class="flex flex-row justify-between w-screen mx-4 max-w-5xl">
       <RouterLink to="/" class="hover:bg-inherit">
         <img alt="Tangjuan logo" class="logo" src="@/assets/logo_vertical.svg" width="125" height="125" />
       </RouterLink>

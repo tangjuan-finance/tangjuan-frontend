@@ -1,0 +1,20 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+</script>
+
+<template>
+  <footer class="flex flex-row justify-center bg-stone-50 p-4">
+
+    <section class='flex flex-col w-[1024px] mt-2 text-sm'>
+      <div>
+        <RouterLink to="/about" class="text-stone-900 hover:text-primary-400">關於躺卷</RouterLink>
+      </div>
+      <Divider />
+      <div>
+        <p>© 2024 Tang Juan.</p>
+      </div>
+    </section>
+  </footer>
+</template>
+
+<style scoped></style>

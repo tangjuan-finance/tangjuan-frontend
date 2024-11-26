@@ -15,4 +15,8 @@
     font-style: normal;
     src: url('./fonts/jf-openhuninn-2.1.ttf') format('truetype');
   }
+
+  a:hover {
+    @apply text-primary-500;
+  }
 }

@@ -19,5 +19,17 @@ export const MyPreset = definePreset(Aura, {
       900: '{yellow.900}',
       950: '{yellow.950}',
     },
+    colorScheme: {
+      light: {
+        formField: {
+          hoverBorderColor: '{primary.color}',
+        },
+      },
+      dark: {
+        formField: {
+          hoverBorderColor: '{primary.color}',
+        },
+      },
+    },
   },
 })
