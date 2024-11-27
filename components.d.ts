@@ -10,7 +10,9 @@ declare module 'vue' {
     BaseFooter: typeof import('./src/components/base/BaseFooter.vue')['default']
     BaseHeader: typeof import('./src/components/base/BaseHeader.vue')['default']
     BaseInputGroup: typeof import('./src/components/base/BaseInputGroup.vue')['default']
+    BaseLineChart: typeof import('./src/components/base/BaseLineChart.vue')['default']
     Button: typeof import('primevue/button')['default']
+    Chart: typeof import('primevue/chart')['default']
     Divider: typeof import('primevue/divider')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
@@ -21,5 +23,6 @@ declare module 'vue' {
     InputText: typeof import('primevue/inputtext')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Test: typeof import('./src/components/base/Test.vue')['default']
   }
 }

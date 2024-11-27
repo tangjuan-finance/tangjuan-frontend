@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import HomeViewBanner from '@/views/HomeViewBanner.vue';
 import BaseInputGroup from '@/components/base/BaseInputGroup.vue';
+import BaseLineChart from '@/components/base/BaseLineChart.vue';
+
 </script>
 
 <template>
@@ -8,6 +10,9 @@ import BaseInputGroup from '@/components/base/BaseInputGroup.vue';
     <div class="flex flex-col gap-y-6">
       <section class="max-w-6xl mt-4">
         <HomeViewBanner />
+      </section>
+      <section class="max-w-6xl mt-4">
+        <BaseLineChart />
       </section>
       <section class="bg-yellow-50 p-8 rounded-md flex flex-col w-[1024px] gap-6">
         <div>
