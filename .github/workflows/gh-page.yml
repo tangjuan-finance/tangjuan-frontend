@@ -42,6 +42,8 @@ jobs:
 
       - name: Build
         run: yarn build # Build the project using Yarn
+        env:
+          VITE_API_BASE_URL: https://useful-bev-f4lazylifes-d32aaf74.koyeb.app/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
