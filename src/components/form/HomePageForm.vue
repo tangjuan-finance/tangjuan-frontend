@@ -1,6 +1,23 @@
 <script setup lang="ts">
 import BaseInputGroup from '@/components/base/BaseInputGroup.vue';
-const formInput = defineModel('formInput')
+// Explicitly define the type for formInput
+type FormInput = {
+  salary_amount: number;
+  expense_amount: number;
+  investment_ratio: number;
+  investment_amount: number;
+  start_year: number;
+  house_start_year: number;
+  child_born_at_age: number;
+  retire_age: number;
+  house_amount: number;
+  down_payment: number;
+  interest: number;
+  loan_term: number;
+};
+
+// Use defineModel with explicit type
+const formInput = defineModel<FormInput>('formInput');
 </script>
 
 <template>
