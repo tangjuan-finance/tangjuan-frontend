@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // import { ref, watch } from 'vue'
-const value = defineModel('value', { required: true })
-
+const value = defineModel<number>('value', {
+  required: true,
+});
 const props = defineProps({
   label: { type: String, required: true },
   type: { type: String, required: true },
@@ -42,7 +43,6 @@ const props = defineProps({
       <InputNumber v-else-if="props.type == 'float'" :inputId="props.name" :min="props.min" :max="props.max"
         :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency"
         :locale="props.locale" v-model="value" :minFractionDigits="2" :maxFractionDigits="2" />
-      <InputText v-else :type="props.type" :id="props.name" v-model="value" />
       <label :for="props.name">{{ props.label }}</label>
     </FloatLabel>
   </InputGroup>
