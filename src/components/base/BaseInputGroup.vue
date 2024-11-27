@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // import { ref, watch } from 'vue'
-const value = defineModel('value')
+const value = defineModel('value', { required: true })
 
 const props = defineProps({
   label: { type: String, required: true },
