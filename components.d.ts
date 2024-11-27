@@ -17,13 +17,11 @@ declare module 'vue' {
     FloatLabel: typeof import('primevue/floatlabel')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     HomePageForm: typeof import('./src/components/form/HomePageForm.vue')['default']
-    HomeViewBanner: typeof import('./src/views/HomeViewBanner.vue')['default']
     InputGroup: typeof import('primevue/inputgroup')['default']
-    InputGroupAddon: typeof import('primevue/inputgroupaddon')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    NumberInputGroup: typeof import('./src/components/base/NumberInputGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Test: typeof import('./src/components/base/Test.vue')['default']
   }
 }
