@@ -6,23 +6,8 @@ import HomePageForm from '@/components/form/HomePageForm.vue';
 
 import api from '@/utils/axios';
 
-interface FormInput {
-  salary_amount: number;
-  expense_amount: number;
-  investment_ratio: number;
-  investment_amount: number;
-  start_year: number;
-  house_start_year: number;
-  child_born_at_age: number;
-  retire_age: number;
-  house_amount: number;
-  down_payment: number;
-  interest: number;
-  loan_term: number;
-}
-
 // Make `formInput` a reactive object with explicit type
-const formInput = reactive<FormInput>({
+const formInput = reactive({
   salary_amount: 50000,
   expense_amount: 10000,
   investment_ratio: 70,
