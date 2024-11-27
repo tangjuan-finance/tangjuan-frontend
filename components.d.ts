@@ -16,6 +16,7 @@ declare module 'vue' {
     Divider: typeof import('primevue/divider')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    HomePageForm: typeof import('./src/components/form/HomePageForm.vue')['default']
     HomeViewBanner: typeof import('./src/views/HomeViewBanner.vue')['default']
     InputGroup: typeof import('primevue/inputgroup')['default']
     InputGroupAddon: typeof import('primevue/inputgroupaddon')['default']

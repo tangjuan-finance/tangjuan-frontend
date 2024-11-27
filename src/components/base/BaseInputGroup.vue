@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+// import { ref, watch } from 'vue'
+const value = defineModel('value')
 
 const props = defineProps({
   label: { type: String, required: true },
@@ -14,22 +15,22 @@ const props = defineProps({
   },
   currency: { type: String },
   locale: { type: String },
-  default: {
-    type: [String, Number], // Allow string or number
-    default: 0
-  },
+  // default: {
+  //   type: [String, Number], // Allow string or number
+  //   default: 0
+  // },
 })
 
-const numValue = ref(Number(props.default) || 0);
-const strValue = ref(String(props.default));
+// const numValue = ref(Number(props.default) || 0);
+// const strValue = ref(String(props.default));
 
-watch(
-  () => props.default,
-  (newValue) => {
-    numValue.value = Number(newValue) || 0;
-    strValue.value = String(newValue);
-  }
-);
+// watch(
+//   () => props.default,
+//   (newValue) => {
+//     numValue.value = Number(newValue) || 0;
+//     strValue.value = String(newValue);
+//   }
+// );
 </script>
 
 <template>
@@ -37,11 +38,11 @@ watch(
     <FloatLabel variant="on">
       <InputNumber v-if="props.type == 'integer'" :inputId="props.name" :min="props.min" :max="props.max"
         :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency"
-        :maxFractionDigits="0" :locale="props.locale" v-model="numValue" />
+        :maxFractionDigits="0" :locale="props.locale" v-model="value" />
       <InputNumber v-else-if="props.type == 'float'" :inputId="props.name" :min="props.min" :max="props.max"
         :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency"
-        :locale="props.locale" v-model="numValue" :minFractionDigits="2" :maxFractionDigits="2" />
-      <InputText v-else :type="props.type" :id="props.name" v-model="strValue" />
+        :locale="props.locale" v-model="value" :minFractionDigits="2" :maxFractionDigits="2" />
+      <InputText v-else :type="props.type" :id="props.name" v-model="value" />
       <label :for="props.name">{{ props.label }}</label>
     </FloatLabel>
   </InputGroup>

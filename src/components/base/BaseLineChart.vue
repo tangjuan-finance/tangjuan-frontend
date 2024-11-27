@@ -1,42 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { Chart as ChartJS, registerables } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
-import api from '@/utils/axios'; // Import the axios utility
 
-const postData = ref<Record<string, number>>({
-  start_year: 15,
-  expense_amount: 10000,
-  investment_amount: 1000000,
-  salary_amount: 50000,
-  house_start_year: 36,
-  house_amount: 10000000,
-  down_payment: 2000000,
-  interest: 1.05,
-  loan_term: 30,
-  child_born_at_age: 34,
-  investment_ratio: 70.00,
-  retire_age: 65,
-});
-const testData = ref<unknown>(null);
-const error = ref<string | null>(null);
-
-const sendData = async () => {
-  try {
-    const result = await api.post<unknown>('process', postData.value); // Replace with actual API endpoint
-    testData.value = result.data;
-  } catch (err) {
-    error.value = 'Failed to send data';
-    console.error(err);
-  }
-};
-
-ChartJS.register(...registerables, annotationPlugin);
-
-// const props = defineProps({
-//   data: { type: Array as () => { x: number, y: number }[] },
-// })
-
+const data = defineModel('data')
 // const testData =
 //   [{ x: 26, y: 1078000 },
 //   { x: 27, y: 1160180 },
@@ -97,7 +64,6 @@ ChartJS.register(...registerables, annotationPlugin);
 //   { x: 83, y: 953819 },
 //   { x: 84, y: 989044 },
 //   { x: 85, y: 1025905 }]
-
 const chartOptions = {
   scales: {
     x: {
@@ -152,40 +118,27 @@ const chartOptions = {
           borderWidth: 4,
         }
       }
-    }
+    },
   }
 }
 
 const chartData = computed(() => ({
   datasets: [{
     label: '當年度投資總額',
-    data: testData.value,
+    data: data.value,
     backgroundColor: 'rgb(255, 99, 132)',
     borderColor: "rgba(255, 99, 132, 0.2)",
     showLine: true,
   }],
 }));
 
-// const chartData = {
-//   datasets: [{
-//     label: '當年度投資總額',
-//     data: testData,
-//     backgroundColor: 'rgb(255, 99, 132)',
-//     borderColor: "rgba(255, 99, 132, 0.2)",
-//     showLine: true,
-//   }],
-// }
-
-console.log(chartData)
+ChartJS.register(...registerables, annotationPlugin);
 </script>
 
 <template>
-  <div>
-    <button @click="sendData">Send Data</button>
-    <div v-if="error">{{ error }}</div>
-    <div v-if="testData">{{ testData }}</div>
+  <div class="w-[1024px]">
+    <Chart type="scatter" :data="chartData" :options="chartOptions" />
   </div>
-  <Chart type="scatter" :data="chartData" :options="chartOptions" />
 </template>
 
 <style scoped></style>
