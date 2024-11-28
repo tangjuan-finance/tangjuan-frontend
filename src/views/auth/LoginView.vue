@@ -39,7 +39,14 @@ const submit = () => {
       <div class="flex flex-col justify-between gap-y-2">
         <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
         <TextInputField label="密碼" name="number" v-model:value="formInput.password" fluid />
-        <Button @click="submit" label="送出" class="text-title" />
+        <Button @click="submit" label="登入" class="text-title" />
+      </div>
+      <Divider />
+      <div class="flex flex-row justify-center">
+        <div class="text-sm text-stone-500">
+          第一次用躺卷？
+          <RouterLink to="/signup" class="text-primary-400">註冊</RouterLink>
+        </div>
       </div>
     </div>
   </main>
