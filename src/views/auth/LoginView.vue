@@ -7,10 +7,12 @@ interface FormInput {
   password: string;
 }
 
+import TextInputField from '@/components/form/TextInputField.vue';
+
 // Make `formInput` a reactive object with explicit type
 const formInput = reactive<FormInput>({
-  email: "example@gmail.com",
-  password: "密碼",
+  email: "",
+  password: "",
 });
 const error = ref<string | null>();
 
@@ -35,25 +37,18 @@ const submit = () => {
     <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-stone-50 p-6 m-8 rounded">
       <h1 class="text-xl text-title">登入</h1>
       <div class="flex flex-col justify-between gap-y-2">
-        <div>input A</div>
-        <div>input B</div>
-        <Button @click="submit" label="送出" class="text-title" />
+        <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
+        <TextInputField label="密碼" name="number" v-model:value="formInput.password" fluid />
+        <Button @click="submit" label="登入" class="text-title" />
+      </div>
+      <Divider />
+      <div class="flex flex-row justify-center">
+        <div class="text-sm text-stone-500">
+          第一次用躺卷？
+          <RouterLink to="/signup" class="text-primary-400">註冊</RouterLink>
+        </div>
       </div>
     </div>
-    <!-- <div class="flex flex-col gap-y-6">
-      <section class="max-w-6xl mt-4">
-        <HomeViewBanner />
-      </section>
-      <section class="max-w-6xl mt-4">
-        <BaseLineChart v-model:data="chartData" />
-      </section>
-      <section class="border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded flex flex-col w-[1024px] gap-6">
-        <HomePageForm v-model:formInput="formInput" />
-        <div class="flex flex-row justify-center">
-          <Button @click="submit" label="送出" class="text-title" />
-        </div>
-      </section>
-    </div> -->
   </main>
 </template>
 
