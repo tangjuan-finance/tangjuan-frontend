@@ -10,8 +10,8 @@ import { RouterLink } from 'vue-router'
       </RouterLink>
       <section class="flex flex-row items-center">
         <div class="p-2">
-          <RouterLink to="/about" class="font-medium text-xl text-stone-900 font-title mx-3">登入</RouterLink>
-          <RouterLink to="/about" class="font-medium text-xl text-stone-900 font-title mx-3">註冊</RouterLink>
+          <RouterLink to="/login" class="font-medium text-xl text-stone-900 font-title mx-3">登入</RouterLink>
+          <RouterLink to="/signup" class="font-medium text-xl text-stone-900 font-title mx-3">註冊</RouterLink>
         </div>
       </section>
     </nav>

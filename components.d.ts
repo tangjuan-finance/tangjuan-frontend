@@ -20,7 +20,7 @@ declare module 'vue' {
     InputGroup: typeof import('primevue/inputgroup')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
     InputText: typeof import('primevue/inputtext')['default']
-    NumberInputGroup: typeof import('./src/components/base/NumberInputGroup.vue')['default']
+    NumberInputGroup: typeof import('./src/components/form/NumberInputGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

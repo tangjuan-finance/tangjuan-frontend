@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NumberInputGroup from '@/components/base/NumberInputGroup.vue';
+import NumberInputGroup from '@/components/form/NumberInputGroup.vue';
 // Explicitly define the type for formInput
 type FormInput = {
   salary_amount: number;
