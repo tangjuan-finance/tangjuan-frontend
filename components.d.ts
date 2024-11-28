@@ -12,13 +12,17 @@ declare module 'vue' {
     BaseLineChart: typeof import('./src/components/base/BaseLineChart.vue')['default']
     Button: typeof import('primevue/button')['default']
     Chart: typeof import('primevue/chart')['default']
+    copy: typeof import('./src/components/form/NumberInputField copy.vue')['default']
     Divider: typeof import('primevue/divider')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']
     HomePageForm: typeof import('./src/components/form/HomePageForm.vue')['default']
     InputGroup: typeof import('primevue/inputgroup')['default']
     InputNumber: typeof import('primevue/inputnumber')['default']
+    InputText: typeof import('primevue/inputtext')['default']
+    NumberInputField: typeof import('./src/components/form/NumberInputField.vue')['default']
     NumberInputGroup: typeof import('./src/components/form/NumberInputGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TextInputField: typeof import('./src/components/form/TextInputField.vue')['default']
   }
 }

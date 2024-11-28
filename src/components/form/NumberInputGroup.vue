@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { ref, watch } from 'vue'
 const value = defineModel<number>('value', {
   required: true,
 });
