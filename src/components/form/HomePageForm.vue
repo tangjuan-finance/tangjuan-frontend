@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { ref, reactive, onMounted } from 'vue'
 import NumberInputGroup from '@/components/form/NumberInputGroup.vue';
+import api from '@/utils/axios';
+
 // Explicitly define the type for formInput
-type FormInput = {
+interface FormInput {
   salary_amount: number;
   expense_amount: number;
   investment_ratio: number;
@@ -14,10 +17,46 @@ type FormInput = {
   down_payment: number;
   interest: number;
   loan_term: number;
+}
+
+// Make `formInput` a reactive object with explicit type
+const formInput = reactive<FormInput>({
+  salary_amount: 50000,
+  expense_amount: 10000,
+  investment_ratio: 70,
+  investment_amount: 1000000,
+  start_year: 26,
+  house_start_year: 36,
+  child_born_at_age: 34,
+  retire_age: 65,
+  house_amount: 10000000,
+  down_payment: 2000000,
+  interest: 1.05,
+  loan_term: 30,
+});
+
+const chartData = defineModel('chartData');
+const error = ref<string | null>();
+
+const fetchData = async () => {
+  try {
+    const response = await api.post<unknown>('process', formInput); // Replace with actual API endpoint
+    chartData.value = response.data;
+  } catch (err) {
+    error.value = 'Failed to send data';
+    console.error(err);
+  }
 };
 
-// Use defineModel with explicit type
-const formInput = defineModel<FormInput>('formInput');
+// Trigger data fetch on mount
+onMounted(() => {
+  fetchData();
+});
+
+// Function for button-triggered fetch
+const submit = () => {
+  fetchData();
+};
 </script>
 
 <template>
@@ -69,4 +108,5 @@ const formInput = defineModel<FormInput>('formInput');
         v-model:value="formInput!.loan_term" class="col-span-1" suffix=" 年" />
     </div>
   </div>
+  <Button @click="submit" label="送出" class="text-title" />
 </template>
