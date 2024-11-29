@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useEmailStore } from '@/stores/emailStore'
+
+const router = useRouter()
+const email_store = useEmailStore()
 
 import api from '@/utils/axios';
 interface FormInput {
@@ -15,10 +20,17 @@ const formInput = reactive<FormInput>({
 const error = ref<string | null>();
 
 const fetchData = async () => {
+  console.log("formInput.email: " + formInput.email)
   try {
-    const response = await api.post<unknown>('login', formInput); // Replace with actual API endpoint
-    // Need to change to saving token
-    console.log(response.data);
+    console.log("formInput: " + formInput)
+    await api.post<unknown>('api/v1/register', formInput); // Replace with actual API endpoint
+    email_store.setEmail(formInput.email)
+
+    console.log("Inside the fetchData")
+    console.log("formInput.email: " + formInput.email)
+    console.log("email_store.email: " + email_store.email)
+
+    router.push({ name: 'signup-email-sent' });
   } catch (err) {
     error.value = 'Failed to send data';
     console.error(err);

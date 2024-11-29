@@ -23,10 +23,10 @@ const props = defineProps({
 
 <template>
   <FloatLabel variant="on">
-    <InputNumber v-if="props.type == 'integer'" :modelValue="value" :inputId="props.name" :min="props.min"
-      :max="props.max" :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency"
-      :maxFractionDigits="0" :locale="props.locale" :disabled="props.disabled" :fluid="props.fluid" />
-    <InputNumber v-else-if="props.type == 'float'" :inputId="props.name" :modelValue="value" :min="props.min"
+    <InputNumber v-if="props.type == 'integer'" v-model="value" :inputId="props.name" :min="props.min" :max="props.max"
+      :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency" :maxFractionDigits="0"
+      :locale="props.locale" :disabled="props.disabled" :fluid="props.fluid" />
+    <InputNumber v-else-if="props.type == 'float'" v-model="value" :inputId="props.name" :min="props.min"
       :max="props.max" :prefix="props.prefix" :suffix="props.suffix" :mode="props.mode" :currency="props.currency"
       :locale="props.locale" :minFractionDigits="2" :maxFractionDigits="2" :disabled="props.disabled"
       :fluid="props.fluid" />

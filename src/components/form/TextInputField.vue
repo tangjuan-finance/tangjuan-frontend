@@ -13,7 +13,7 @@ const props = defineProps({
 
 <template>
   <FloatLabel variant="on">
-    <InputText :modelValue="value" :name="props.name" :disabled="props.disabled" :fluid="props.fluid" />
+    <InputText v-model="value" :name="props.name" :disabled="props.disabled" :fluid="props.fluid" />
     <label :for="props.name">{{ props.label }}</label>
   </FloatLabel>
 </template>
