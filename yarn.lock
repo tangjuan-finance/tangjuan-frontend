@@ -1510,6 +1510,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-api@npm:^7.5.2":
+  version: 7.6.7
+  resolution: "@vue/devtools-api@npm:7.6.7"
+  dependencies:
+    "@vue/devtools-kit": "npm:^7.6.7"
+  checksum: 10c0/c5b9f2008c2232306fa84b90960df6e141b8e3ab7836b53391688efd68da078a96eddf8e0a225b614b59d590ed3d77ee6c35f614ad90b5bb854237345cac2897
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-core@npm:^7.6.4":
   version: 7.6.4
   resolution: "@vue/devtools-core@npm:7.6.4"
@@ -1541,12 +1550,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/devtools-kit@npm:^7.6.7":
+  version: 7.6.7
+  resolution: "@vue/devtools-kit@npm:7.6.7"
+  dependencies:
+    "@vue/devtools-shared": "npm:^7.6.7"
+    birpc: "npm:^0.2.19"
+    hookable: "npm:^5.5.3"
+    mitt: "npm:^3.0.1"
+    perfect-debounce: "npm:^1.0.0"
+    speakingurl: "npm:^14.0.1"
+    superjson: "npm:^2.2.1"
+  checksum: 10c0/f4b80b570c33620eefe8d4136b999c8994d671903417b7fd77d2c5d8c9496d4e2e94660d07f9df1ed7cc1ef45d4352140eb55a7ac7930a12bb7da6d5f5f94c7d
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-shared@npm:^7.6.4":
   version: 7.6.4
   resolution: "@vue/devtools-shared@npm:7.6.4"
   dependencies:
     rfdc: "npm:^1.4.1"
   checksum: 10c0/4cee3e674d781af0ee22b3384f039907a1056a6c6f6d701f1bc21f93f4d376cffa584539cbe3c0ce7f5de9d771b00167526c19dec200ce73c2beb10c30d70a5c
+  languageName: node
+  linkType: hard
+
+"@vue/devtools-shared@npm:^7.6.7":
+  version: 7.6.7
+  resolution: "@vue/devtools-shared@npm:7.6.7"
+  dependencies:
+    rfdc: "npm:^1.4.1"
+  checksum: 10c0/516cb6f8ae73a67656767a4ba85878a0ed08ae6b03e63b476df166fee7750e90a89112c824d03112fc6764ae787b8a20aeb7f74642b514e09c18a50fca8029e5
   languageName: node
   linkType: hard
 
@@ -5908,6 +5941,7 @@ __metadata:
     tailwindcss-primeui: "npm:^0.3.4"
     typescript: "npm:~5.6.3"
     unplugin-vue-components: "npm:^0.27.4"
+    vee-validate: "npm:^4.14.7"
     vite: "npm:^5.4.10"
     vite-plugin-vue-devtools: "npm:^7.5.4"
     vitest: "npm:^2.1.4"
@@ -6128,6 +6162,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"type-fest@npm:^4.8.3":
+  version: 4.29.0
+  resolution: "type-fest@npm:4.29.0"
+  checksum: 10c0/de11f04e141e4dd2caf8ba9cb4894955f73d60c06303f93836feea66f162166a2d66e81e7aca270721627cdc7fef2d248b21917fe1346598a66c3d6b856d2d7f
+  languageName: node
+  linkType: hard
+
 "typescript-eslint@npm:^8.8.1":
   version: 8.15.0
   resolution: "typescript-eslint@npm:8.15.0"
@@ -6283,6 +6324,18 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 10c0/bcbb807a917d374a49f475fae2e87fdca7da5e5530820ef53f65ba1d12131bd81a92ecf259cc7ce317cbe0f289e7d79fdfebcef9bfa3087c8c8a2fa304c9be54
+  languageName: node
+  linkType: hard
+
+"vee-validate@npm:^4.14.7":
+  version: 4.14.7
+  resolution: "vee-validate@npm:4.14.7"
+  dependencies:
+    "@vue/devtools-api": "npm:^7.5.2"
+    type-fest: "npm:^4.8.3"
+  peerDependencies:
+    vue: ^3.4.26
+  checksum: 10c0/6d03bc8e11719f212bf20c1b2d260c186c25bfa23ecba2b4eaddc7890c554f86d63d7e9d4c5da731759b0e5bdb4ace68f5a97aff6866284733b2c96a0c160187
   languageName: node
   linkType: hard
 
