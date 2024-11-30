@@ -33,22 +33,20 @@ const submit = () => {
 </script>
 
 <template>
-  <main class="flex flex-row justify-center py-4 bg-yellow-50">
-    <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-stone-50 p-6 m-8 rounded">
-      <h1 class="text-xl text-title">註冊</h1>
-      <div class="flex flex-col justify-between gap-y-2">
-        <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
-        <Button @click="submit" label="下一步" class="text-title" />
-      </div>
-      <Divider />
-      <div class="flex flex-row justify-center">
-        <div class="text-sm text-stone-500">
-          已經有帳號？
-          <RouterLink to="/login" class="text-primary-400">登入</RouterLink>
-        </div>
+  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded">
+    <h1 class="text-xl text-title">註冊</h1>
+    <div class="flex flex-col justify-between gap-y-2">
+      <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
+      <Button @click="submit" label="下一步" class="text-title" />
+    </div>
+    <Divider />
+    <div class="flex flex-row justify-center">
+      <div class="text-sm text-stone-500">
+        已經有帳號？
+        <RouterLink to="/login" class="text-primary-400">登入</RouterLink>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped></style>

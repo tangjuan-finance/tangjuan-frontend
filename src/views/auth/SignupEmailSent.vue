@@ -1,20 +1,37 @@
 <script setup lang="ts">
-import { useEmailStore } from '@/stores/emailStore'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-const email_store = useEmailStore()
+const router = useRouter()
+const email = ref('')
 
-console.log("Inside SignupEmailSent")
-console.log("email_store.email: " + email_store.email)
+// Check if email exists in sessionStorage
+const checkEmail = () => {
+  const emailFromSession = sessionStorage.getItem('registration_email')
+
+  if (emailFromSession) {
+    email.value = emailFromSession
+  } else {
+    // Redirect to homepage if email is not found
+    router.push({ name: 'home' })
+  }
+}
+
+// Run this logic after component mounts
+onMounted(() => {
+  checkEmail()
+})
 </script>
 
 <template>
-  <main class="flex flex-row justify-center py-4 bg-yellow-50">
-    <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-stone-50 p-6 m-8 rounded">
-      <div>
-        您的註冊驗證信件已經寄到 {{ email_store.email }}，請至該信箱查看註冊驗證信件，以完成註冊。
-      </div>
+  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded">
+    <h1 class="text-title text-xl">
+      註冊驗證信已經寄出
+    </h1>
+    <div>
+      您的註冊驗證信件已經寄到 {{ email }}，請至該信箱查看註冊驗證信件，以完成註冊。
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped></style>

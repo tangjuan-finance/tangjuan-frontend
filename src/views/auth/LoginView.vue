@@ -33,23 +33,21 @@ const submit = () => {
 </script>
 
 <template>
-  <main class="flex flex-row justify-center py-4 bg-yellow-50">
-    <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-stone-50 p-6 m-8 rounded">
-      <h1 class="text-xl text-title">登入</h1>
-      <div class="flex flex-col justify-between gap-y-2">
-        <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
-        <TextInputField label="密碼" name="number" v-model:value="formInput.password" fluid />
-        <Button @click="submit" label="登入" class="text-title" />
-      </div>
-      <Divider />
-      <div class="flex flex-row justify-center">
-        <div class="text-sm text-stone-500">
-          第一次用躺卷？
-          <RouterLink to="/signup" class="text-primary-400">註冊</RouterLink>
-        </div>
+  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded">
+    <h1 class="text-xl text-title">登入</h1>
+    <div class="flex flex-col justify-between gap-y-2">
+      <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
+      <TextInputField label="密碼" name="number" v-model:value="formInput.password" fluid />
+      <Button @click="submit" label="登入" class="text-title" />
+    </div>
+    <Divider />
+    <div class="flex flex-row justify-center">
+      <div class="text-sm text-stone-500">
+        第一次用躺卷？
+        <RouterLink to="/signup" class="text-primary-400">註冊</RouterLink>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <style scoped></style>
