@@ -12,7 +12,6 @@ declare module 'vue' {
     BaseLineChart: typeof import('./src/components/base/BaseLineChart.vue')['default']
     Button: typeof import('primevue/button')['default']
     Chart: typeof import('primevue/chart')['default']
-    copy: typeof import('./src/components/form/NumberInputField copy.vue')['default']
     Divider: typeof import('primevue/divider')['default']
     FlashMessage: typeof import('./src/components/base/FlashMessage.vue')['default']
     FloatLabel: typeof import('primevue/floatlabel')['default']

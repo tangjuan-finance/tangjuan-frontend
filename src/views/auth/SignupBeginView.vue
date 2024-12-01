@@ -10,11 +10,11 @@ const router = useRouter();
 const flashMessageStore = useFlashMessageStore();
 
 // Define form schema and validation
-interface LoginForm {
+interface SignupBeginForm {
   email: string;
 }
 
-const { values, errors, handleSubmit, defineField, setFieldError } = useForm<LoginForm>({
+const { values, errors, handleSubmit, defineField, setFieldError } = useForm<SignupBeginForm>({
   validationSchema: toTypedSchema(
     object({
       email: string().email('請輸入有效的電子信箱').required('電子信箱為必填欄位'),
@@ -41,7 +41,7 @@ const onSubmit = handleSubmit(async (formData) => {
       Object.entries(err.response.data.error?.fields).forEach(([field, errorMessage]) => {
         // Narrow field type to match LoginForm keys
         if (field in values) {
-          setFieldError(field as keyof LoginForm, errorMessage as string);
+          setFieldError(field as keyof SignupBeginForm, errorMessage as string);
         }
       });
     }
@@ -53,13 +53,8 @@ const onSubmit = handleSubmit(async (formData) => {
     <h1 class="text-2xl font-title">註冊</h1>
     <div class="flex flex-col justify-between gap-y-2"></div>
     <form @submit.prevent="onSubmit" class="flex flex-col gap-y-4">
-      <div>
-        <TextInputField label="電子信箱" name="email" v-model.trim="email" v-bind="emailAttrs" :invalid="!!errors['email']"
-          fluid />
-        <small v-if="errors.email" class="text-red-600">
-          {{ errors.email }}
-        </small>
-      </div>
+      <TextInputField label="電子信箱" name="email" v-model.trim="email" v-bind="emailAttrs" :invalid="!!errors['email']"
+        :error="errors.email" fluid />
       <div>
         <Button type="submit" label="下一步" class="text-title" fluid />
       </div>

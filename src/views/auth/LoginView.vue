@@ -1,45 +1,71 @@
+<style scoped></style>
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-
+import { useRouter } from 'vue-router'
+import { useFlashMessageStore } from '@/stores/flashMessageStore';
+import { useForm } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/yup';
+import { object, string } from 'yup';
 import api from '@/utils/axios';
-interface FormInput {
+import TextInputField from '@/components/form/TextInputField.vue';
+const router = useRouter();
+const flashMessageStore = useFlashMessageStore();
+
+// Define form schema and validation
+interface LoginForm {
   email: string;
   password: string;
 }
 
-import TextInputField from '@/components/form/TextInputField.vue';
-
-// Make `formInput` a reactive object with explicit type
-const formInput = reactive<FormInput>({
-  email: "",
-  password: "",
+const { values, errors, handleSubmit, defineField, setFieldError } = useForm<LoginForm>({
+  validationSchema: toTypedSchema(
+    object({
+      email: string().email('請輸入有效的電子信箱').required('電子信箱為必填欄位'),
+      password: string().min(6, '密碼長度需至少 6 個字元').required('密碼為必填欄位'),
+    }),
+  ),
+  initialValues: {
+    email: '', // Default value
+    password: ''
+  },
 });
-const error = ref<string | null>();
 
-const fetchData = async () => {
+const [email, emailAttrs] = defineField('email');
+const [password, passwordAttrs] = defineField('password');
+
+// Handle form submission
+const onSubmit = handleSubmit(async () => {
   try {
-    const response = await api.post<unknown>('login', formInput); // Replace with actual API endpoint
-    // Need to change to saving token
-    console.log(response.data);
-  } catch (err) {
-    error.value = 'Failed to send data';
-    console.error(err);
+    // await api.post<unknown>('api/v1/register', formData);
+
+    // Success logic
+    // sessionStorage.setItem('registration_email', formData.email);
+    flashMessageStore.setFlashMessage('登入成功', 'success');
+    router.push({ name: 'home' });
+  } catch (err: any) {
+    if (err.response?.data?.error?.fields) {
+      Object.entries(err.response.data.error?.fields).forEach(([field, errorMessage]) => {
+        // Narrow field type to match LoginForm keys
+        if (field in values) {
+          setFieldError(field as keyof LoginForm, errorMessage as string);
+        }
+      });
+    }
   }
-};
-
-const submit = () => {
-  fetchData();
-};
+});
 </script>
-
 <template>
-  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded">
-    <h1 class="text-xl text-title">登入</h1>
-    <div class="flex flex-col justify-between gap-y-2">
-      <TextInputField label="電子信箱" name="email" v-model:value="formInput.email" fluid />
-      <TextInputField label="密碼" name="number" v-model:value="formInput.password" fluid />
-      <Button @click="submit" label="登入" class="text-title" />
-    </div>
+  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-8 m-8 rounded">
+    <h1 class="text-2xl font-title">登入</h1>
+    <div class="flex flex-col justify-between gap-y-2"></div>
+    <form @submit.prevent="onSubmit" class="flex flex-col gap-y-4">
+      <TextInputField label="電子信箱" name="email" v-model.trim="email" v-bind="emailAttrs" :invalid="!!errors['email']"
+        :error="errors.email" fluid />
+      <TextInputField label="密碼" name="number" v-model.trim="password" v-bind="passwordAttrs"
+        :invalid="!!errors['password']" :error="errors.password" fluid />
+      <div>
+        <Button type="submit" label="登入" class="text-title" fluid />
+      </div>
+    </form>
     <Divider />
     <div class="flex flex-row justify-center">
       <div class="text-sm text-stone-500">
