@@ -39,8 +39,17 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/auth/SignupView.vue'),
+      component: () => import('../views/auth/SignupBeginView.vue'),
       meta: { title: '註冊' },
+    },
+    {
+      path: '/signup-email-sent',
+      name: 'signup-email-sent',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/auth/SignupEmailSent.vue'),
+      meta: { title: '已寄送註冊驗證信到您的電子信箱' },
     },
   ],
 })

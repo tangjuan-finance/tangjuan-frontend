@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import BaseHeader from './components/base/BaseHeader.vue'
-import BaseFooter from './components/base/BaseFooter.vue'
+import BaseHeader from '@/components/base/BaseHeader.vue'
+import BaseFooter from '@/components/base/BaseFooter.vue'
+import FlashMessage from '@/components/base/FlashMessage.vue'
 </script>
 
 <template>
   <BaseHeader />
-  <RouterView />
+  <main class="flex flex-col items-center py-4 bg-stone-50">
+    <FlashMessage />
+    <RouterView />
+  </main>
   <BaseFooter />
 </template>
 
