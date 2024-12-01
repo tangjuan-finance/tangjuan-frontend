@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useFlashMessageStore } from '@/stores/flashMessageStore'
+import { getErrorCodes } from '@/utils/errorCodes'
 
 // Define a type for the API response
 interface ApiResponse<T> {
@@ -17,30 +18,35 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const flashMessageStore = useFlashMessageStore()
+
     if (error.response) {
       const { status, data } = error.response
 
       // 1. Handle non-field-specific validation errors
-      if (data?.message) {
+      if (data?.error?.code) {
         // Display the generic message (e.g., "Email already exists")
-        flashMessageStore.setFlashMessage(data.message, 'error')
+        flashMessageStore.setFlashMessage(getErrorCodes(data?.error?.code), 'error')
       }
-
       // 2. Handle authentication errors
       else if (status === 401 || status === 403) {
         flashMessageStore.setFlashMessage('您沒有權限執行此操作，請重新登入。', 'error')
       }
 
-      // 3. Handle generic server errors
+      // 3. Handle not found errors
+      else if (status === 404) {
+        flashMessageStore.setFlashMessage('指定的資訊不存在', 'error')
+      }
+
+      // 4. Handle generic server errors
       else if (status >= 500) {
         flashMessageStore.setFlashMessage('伺服器發生錯誤，請稍後再試。', 'error')
       }
     }
-    // 4. Handle network issues
+    // 5. Handle network issues
     else if (error.request) {
       flashMessageStore.setFlashMessage('無法連線到伺服器，請檢查您的網絡連線。', 'error')
     }
-    // 5. Handle unexpected errors
+    // 6. Handle unexpected errors
     else {
       flashMessageStore.setFlashMessage('發生未知錯誤，請稍後再試。', 'error')
     }
