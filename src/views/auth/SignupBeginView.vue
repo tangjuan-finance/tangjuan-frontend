@@ -1,84 +1,81 @@
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFlashMessageStore } from '@/stores/flashMessageStore';
-import { validateEmailFormat } from '@/utils/validators/emailValidator';
 import { useForm } from 'vee-validate';
-
-
-const router = useRouter()
-
+import { toTypedSchema } from '@vee-validate/yup';
+import { object, string } from 'yup';
 import api from '@/utils/axios';
-
 import TextInputField from '@/components/form/TextInputField.vue';
-
-// Make `formInput` a reactive object with explicit type
-const formInput = reactive({
-  email: "",
-});
-
-interface ValidationState {
-  email: {
-    isValid: boolean, // Tracks the validation state
-    message?: string,   // Error message to display
-  },
-}
-
-const validationState: ValidationState = reactive({
-  email: {
-    isValid: true, // Tracks the validation state
-    message: '',   // Error message to display
-  },
-});
-
-const errors = ref<Record<string, string>>({}); // Field-specific errors
+const router = useRouter();
 const flashMessageStore = useFlashMessageStore();
 
-const fetchData = async () => {
+// Define form schema and validation
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+const { values, errors, handleSubmit, defineField, setFieldError } = useForm<LoginForm>({
+  validationSchema: toTypedSchema(
+    object({
+      email: string().email('請輸入有效的電子信箱').required('電子信箱為必填欄位'),
+      password: string().min(6, '密碼長度需至少 6 個字元').required('密碼為必填欄位'),
+    }),
+  ),
+  initialValues: {
+    email: '', // Default value
+    password: '', // Default value
+  },
+});
+
+const [email, emailAttrs] = defineField('email');
+const [password, passwordAttrs] = defineField('password');
+
+// Handle form submission
+const onSubmit = handleSubmit(async (formData) => {
   try {
-    await api.post<unknown>('api/v1/register', formInput); // Replace with actual API endpoint
-    sessionStorage.setItem('registration_email', formInput.email);
+    // Call backend API
+    console.log("formData: ", formData)
+    console.log("formData.email: ", formData.email)
+    await api.post<unknown>('api/v1/register', formData);
+
+    // Success logic
+    sessionStorage.setItem('registration_email', formData.email);
     flashMessageStore.setFlashMessage('已將驗證信寄至您的信箱，請前往收信', 'success');
     router.push({ name: 'signup-email-sent' });
   } catch (err: any) {
-    if (err.response?.data?.errors.email) {
-      errors.value = err.response.data.errors; // Assign field-specific errors
-    } else {
-      // Handle generic errors
-      flashMessageStore.setFlashMessage('出現非預期的錯誤', 'error');
+    if (err.response?.data?.errors) {
+      Object.entries(err.response.data.errors).forEach(([field, errorMessage]) => {
+        // Narrow field type to match LoginForm keys
+        if (field in values) {
+          setFieldError(field as keyof LoginForm, errorMessage as string);
+        }
+      });
     }
-
   }
-};
-
-watch(
-  () => formInput.email,
-  (newEmail) => {
-
-    const { isValid, message } = validateEmailFormat(newEmail);
-    validationState.email = { isValid, message };
-  },
-);
-
-const submit = () => {
-  fetchData();
-};
+});
 </script>
-
 <template>
-  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-6 m-8 rounded">
+  <div class="flex flex-col justify-between gap-y-4 w-[448px] border-yellow-300 border-2 bg-yellow-50 p-8 m-8 rounded">
     <h1 class="text-xl text-title">註冊</h1>
-    <div class="flex flex-col justify-between gap-y-2">
+    <div class="flex flex-col justify-between gap-y-2"></div>
+    <form @submit.prevent="onSubmit" class="flex flex-col gap-y-4">
       <div>
-        <TextInputField label="電子信箱" name="email" v-model="formInput.email" :invalid="!validationState.email.isValid"
-          fluid />
-        <small v-if="!validationState.email.isValid" id="email-help" class="error-message">
-          {{ validationState.email.message }}
+        <TextInputField label="電子信箱" name="email" v-model="email" v-bind="emailAttrs" fluid />
+        <small v-if="errors.email">
+          {{ errors.email }}
         </small>
       </div>
-      <!-- <div v-if="errors.email" class="field-error">{{ errors.email }}</div> -->
-      <Button @click="submit" label="下一步" class="text-title" />
-    </div>
+      <div>
+        <TextInputField label="密碼" name="password" v-model="password" v-bind="passwordAttrs" fluid />
+        <small v-if="errors.password">
+          {{ errors.password }}
+        </small>
+      </div>
+      <div>
+        <Button type="submit" label="下一步" class="text-title" fluid />
+      </div>
+    </form>
     <Divider />
     <div class="flex flex-row justify-center">
       <div class="text-sm text-stone-500">
