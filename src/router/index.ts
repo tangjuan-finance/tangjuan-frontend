@@ -51,6 +51,11 @@ const router = createRouter({
       component: () => import('../views/auth/SignupEmailSent.vue'),
       meta: { title: '已寄送註冊驗證信到您的電子信箱' },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('../views/error/NotFoundView.vue'),
+    },
   ],
 })
 
